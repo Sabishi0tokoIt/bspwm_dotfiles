@@ -1,0 +1,114 @@
+#######################################################
+# Archivo: ~/.config/dunst/dunstrc
+# Descripción: Configuración minimalista y oscura de dunst
+#              con soporte para Nerd Fonts e integración
+#              estética con lemonbar.
+# Autor: Yandri Loor
+# Última modificación: 20 de Septiembre del 2025
+#######################################################
+
+[global]
+    ### Pantalla ###
+    monitor = 0
+    follow = mouse
+
+    ### Geometría ###
+    width = (0, 300)
+    height = (0, 200)
+    origin = top-right
+    offset = (10, 30)
+    scale = 1
+    notification_limit = 5
+
+    ### Barra de progreso ###
+    progress_bar = true
+    progress_bar_height = 6
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+
+    ### Apariencia ###
+    separator_height = 2
+    padding = 12
+    horizontal_padding = 16
+    text_icon_padding = 4
+    frame_width = 1
+    frame_color = "#444444"
+    separator_color = frame
+    corner_radius = 9
+
+    ### Texto ###
+    font = "FiraCode Nerd Font 10"
+    line_height = 0
+    markup = full
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    vertical_alignment = center
+    show_age_threshold = 60
+    ellipsize = end
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+
+    ### Iconos ###
+    icon_position = left
+    min_icon_size = 16
+    max_icon_size = 32
+    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+
+    ### Historial ###
+    sticky_history = yes
+    history_length = 20
+
+    ### Avanzado ###
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/xdg-open
+    always_run_script = true
+    title = Dunst
+    class = Dunst
+    ignore_dbusclose = false
+
+    ### Ratón ###
+    mouse_left_click = close_current
+    mouse_middle_click = close_all
+    mouse_right_click = do_action, close_current
+
+[experimental]
+    per_monitor_dpi = false
+
+[urgency_low]
+    background = "#222222"
+    foreground = "#cccccc"
+    timeout = 5
+
+[urgency_normal]
+    background = "#222222"
+    foreground = "#ffffff"
+    timeout = 8
+
+[urgency_critical]
+    background = "#ac4142"
+    foreground = "#ffffff"
+    frame_color = "#ac4142"
+    timeout = 0
+
+### Reglas para ignorar historial de notificaciones repetitivas ###
+[volume-history-ignore]
+appname = volIndicator
+history_ignore = yes
+
+[brightness-history-ignore]
+appname = brightIndicator
+history_ignore = yes
+
+[battery-history-ignore]
+appname = clickBat
+history_ignore = yes
+
+[ethernet-history-ignore]
+appname = clickEth
+history_ignore = yes
+
+[wifi-history-ignore]
+appname = clickWifi
+history_ignore = yes
+

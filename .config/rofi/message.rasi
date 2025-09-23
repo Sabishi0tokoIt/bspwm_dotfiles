@@ -1,0 +1,95 @@
+/* ======================================================= */
+/* Archivo: ~/.config/rofi/bluetooth.rasi                  */
+/* Descripción: Tema para los mensajes de mantenimiento    */
+/*              inspirado en temas oscuros, pero sin       */
+/*              barra de búsqueda y con barra de título.   */
+/* Autor: Yandri Loor                                      */
+/* Última modificación: 23 de Septiembre del 2025          */
+/* ======================================================= */
+
+configuration {
+    font: "JetBrains Mono 14";
+    lines: 2;              /* Cantidad de filas visibles */
+    padding: 10;
+}
+
+/* ======================================================= */
+/* Estilos generales                                      */
+/* ======================================================= */
+* {
+    background-color:  #222222;
+    text-color:        White;
+    border-color:      #444444;
+    border-radius:     6;
+    font:              "FiraCode Nerd Font 14";
+    location:          center;
+    x-offset:          -10;
+    y-offset:          30;
+}
+
+/* ======================================================= */
+/* Ventana principal                                      */
+/* ======================================================= */
+window {
+    background-color:  #222222;
+    text-color:        #ffffff;
+    border:            2;
+    border-radius:     9;
+    padding:           3;
+    width:             580px;
+    height:            140px;
+}
+
+/* ======================================================= */
+/* Barra de título                                        */
+/* ======================================================= */
+textbox {
+    expand: false;
+    str: " AVISO";
+    text-color: #ffffff;
+    background-color: #444444;
+    border: 1px;
+    border-color: #89b4fa;
+    border-radius: 6px;
+    padding: 6px;
+    horizontal-align: 0.5; /* Centrado */
+}
+
+/* ======================================================= */
+/* Lista de información                                   */
+/* ======================================================= */
+listview {
+    spacing: 5;
+    scrollbar: false;
+    fixed-height: true;
+    separator: true;
+    separator-color: #555555;
+}
+
+/* ======================================================= */
+/* Elementos                                               */
+/* ======================================================= */
+element {
+    background-color: transparent;
+    text-color: #ffffff;
+    padding: 3;
+}
+
+element selected {
+    background-color: #a6e3a1;
+    text-color: #222222;
+}
+
+element alternate {
+    text-color: #d9e00e;
+}
+
+/* ======================================================= */
+/* Layout                                                 */
+/* ======================================================= */
+mainbox {
+    children: [ textbox, listview ];  /* primero el título, luego la lista */
+    spacing: 10px;
+    padding: 10px;
+}
+

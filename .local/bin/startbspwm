@@ -1,0 +1,24 @@
+#!/bin/bash
+# startbspwm final para LightDM
+
+export DISPLAY=:0
+export XAUTHORITY=/home/sabishi/.Xauthority
+export PATH=/usr/local/bin:/usr/bin:/bin
+
+# Permitir acceso al X server
+xhost +SI:localuser:sabishi
+
+setxkbmap es
+
+# Cargar Xresources
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
+# Iniciar sxhkd
+command -v sxhkd &>/dev/null && sxhkd &
+
+# Iniciar barra
+[[ -f ~/.config/bspwm_lemonbar/bar.sh ]] && ~/.config/bspwm_lemonbar/bar.sh &
+
+# Ejecutar BSPWM
+exec bspwm
+

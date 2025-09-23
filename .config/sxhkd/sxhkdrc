@@ -1,0 +1,264 @@
+########################################################
+# sxhkdrc para BSPWM
+# Atajos de teclado principales
+# Autor: Yandri Loor
+########################################################
+
+#
+# Tecla modificadora principal
+#
+# super = tecla Windows
+#
+
+########################################################
+# Terminal y lanzador de programas
+########################################################
+
+# Abrir terminal
+super + Return
+    urxvt
+
+# Lanzador de aplicaciones (dmenu)
+super + space
+    dmenu_run
+
+# Recargar la configuración de sxhkd sin reiniciar BSPWM
+super + Escape
+    pkill -USR1 -x sxhkd
+
+########################################################
+# BSPWM: salir o reiniciar WM
+########################################################
+
+# Salir o reiniciar BSPWM
+super + alt + q
+    bspc quit
+super + alt + r
+    bspc wm -r
+
+########################################################
+# Ventanas: cerrar, matar, alternar layouts
+########################################################
+
+# Cerrar o matar ventana activa
+super + w
+    bspc node -c    # cerrar
+super + shift + w
+    bspc node -k    # matar
+
+# Alternar entre layouts tiled y monocle
+super + m
+    bspc desktop -l next
+
+# Alternar entre floating y tiled
+super + shift + space
+    bspc node -t ~floating
+
+########################################################
+# Estados y flags de ventanas
+########################################################
+
+# Cambiar estado de ventana
+super + t
+    bspc node -t tiled
+super + shift + t
+    bspc node -t pseudo_tiled
+super + s
+    bspc node -t floating
+super + f
+    bspc node -t fullscreen
+
+# Flags de ventana: marcada, bloqueada, sticky, privada
+super + ctrl + m
+    bspc node -g marked
+super + ctrl + x
+    bspc node -g locked
+super + ctrl + y
+    bspc node -g sticky
+super + ctrl + z
+    bspc node -g private
+
+########################################################
+# Movimiento y enfoque
+########################################################
+
+# Enfocar ventana en dirección
+super + h
+    bspc node -f west
+super + j
+    bspc node -f south
+super + k
+    bspc node -f north
+super + l
+    bspc node -f east
+
+# Mover ventana en dirección
+super + shift + h
+    bspc node -s west
+super + shift + j
+    bspc node -s south
+super + shift + k
+    bspc node -s north
+super + shift + l
+    bspc node -s east
+
+# Enfocar ventana por relación (padre, hermano, primero, segundo)
+super + p
+    bspc node -f @parent
+super + b
+    bspc node -f @brother
+super + comma
+    bspc node -f @first
+super + period
+    bspc node -f @second
+
+# Enfocar siguiente/anterior ventana del escritorio
+super + c
+    bspc node -f next.local
+super + shift + c
+    bspc node -f prev.local
+
+# Enfocar escritorio anterior/siguiente en el monitor actual
+super + [
+    bspc desktop -f prev.local
+super + ]
+    bspc desktop -f next.local
+
+# Enfocar último nodo/escritorio
+super + grave
+    bspc node -f last
+super + Tab
+    bspc desktop -f last
+
+# Enfocar ventana más vieja/nueva según historial
+super + o
+    bspc wm -h off; bspc node older -f; bspc wm -h on
+super + i
+    bspc wm -h off; bspc node newer -f; bspc wm -h on
+
+########################################################
+# Cambiar o enviar ventana a escritorio
+########################################################
+
+# Cambiar entre escritorios 1-10 y enviar ventana a escritorio
+super + 1
+    bspc desktop 1 -f
+super + shift + 1
+    bspc node -d 1
+super + 2
+    bspc desktop 2 -f
+super + shift + 2
+    bspc node -d 1
+
+
+########################################################
+# Preselección de ventanas
+########################################################
+
+# Preseleccionar ventana en dirección
+super + ctrl + h
+    bspc node -p west
+super + ctrl + j
+    bspc node -p south
+super + ctrl + k
+    bspc node -p north
+super + ctrl + l
+    bspc node -p east
+
+# Preselección de ratio
+super + ctrl + 1
+    bspc node -o 0.1
+super + ctrl + 2
+    bspc node -o 0.2
+super + ctrl + 3
+    bspc node -o 0.3
+super + ctrl + 4
+    bspc node -o 0.4
+super + ctrl + 5
+    bspc node -o 0.5
+super + ctrl + 6
+    bspc node -o 0.6
+super + ctrl + 7
+    bspc node -o 0.7
+super + ctrl + 8
+    bspc node -o 0.8
+super + ctrl + 9
+    bspc node -o 0.9
+
+# Cancelar preselección
+super + ctrl + space
+    bspc node -p cancel
+super + ctrl + shift + space
+    bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+########################################################
+# Mover y redimensionar ventanas flotantes con el mouse
+########################################################
+
+# Mover ventana flotante con super + clic izquierdo
+super + button1
+    bspc node -v %i %j
+
+# Redimensionar ventana flotante con super + clic derecho
+super + button3
+    bspc node -z %i %j
+
+########################################################
+# Mover ventana flotante con teclado
+########################################################
+
+super + Left
+    bspc node -v -20 0
+super + Right
+    bspc node -v 20 0
+super + Up
+    bspc node -v 0 -20
+super + Down
+    bspc node -v 0 20
+
+########################################################
+# Control de volumen
+########################################################
+
+XF86AudioRaiseVolume
+    pamixer --allow-boost=false -i 5
+
+XF86AudioLowerVolume
+    pamixer -d 5
+
+XF86AudioMute
+    pamixer -t
+
+################################
+# Control de brillo de pantalla
+################################
+
+# Subir brillo 5%
+super + XF86MonBrightnessUp
+    brightnessctl set +5%
+
+# Bajar brillo 5%
+super + XF86MonBrightnessDown
+    brightnessctl set 5%-
+
+########################################################
+# Cambiar a la siguiente ventana con Alt+Tab
+########################################################
+
+alt + Tab
+    bspc node -f next.local
+
+########################
+# Capturas de pantalla
+########################
+
+# Captura completa de pantalla
+Print
+    scrot ~/imagenes/captura_%Y-%m-%d_%H-%M-%S.png \
+    && notify-send "Captura de pantalla" "Pantalla completa guardada"
+
+# Captura de área seleccionada con el mouse
+Shift + Print
+    scrot -s ~/imagenes/captura_%Y-%m-%d_%H-%M-%S.png \
+    && notify-send "Captura de pantalla" "Área seleccionada guardada"
+

@@ -1,0 +1,124 @@
+#######################################################
+# Archivo: ~/.config/bspwm_lemonbar/config
+# Descripción: Archivo de configuración principal de LemonBar.
+#              Define parámetros visuales y funcionales de la barra,
+#              incluyendo:
+#              - Estilo: Altura, anchura, posición (arriba/abajo), márgenes.
+#              - Temas: esquema de colores para texto, fondo, módulos.
+#              - Fuentes: Tipo, tamaño y estilo de fuente (ej: Nerd Fonts para iconos).
+#              - Formato: Alineación de módulos (izquierda, centro, derecha).
+#              - Iconos: Definición de iconos personalizados (ej: batería, volumen, red).
+#              - Comportamiento: Si la barra es estática o dinámica, y eventos de actualización.
+#              - Módulos: Configuración específica para cada módulo (ej: formato de fecha/hora).
+# Autor: Yandri Loor
+# Última modificación: 19 de Septiembre del 2025
+##########################################################
+
+##############################
+# Colores para un tema oscuro
+##############################
+
+# Colores principales
+BG="#1E1E2E"
+FG="#D9E0EE"
+PR="#CDD6F4"
+WARNING="#C70C0C"
+
+# Escritorios
+ACTIVE="#A6E3A1"
+INACTIVE="#6C7086"
+
+# Bateria
+CBATA="#A6E3A1"
+CBATM="#F9E2AF"
+CBATB="#F38BA8"
+CBATC="#2A56E8"
+
+# CPU
+CCPUB="#A6E3A1"
+CCPUM="#F9E2AF"
+CCPUA="#F38BA8"
+
+# Memoria
+CMEMB="#94E2D5"
+CMEMM="#FAB387"
+CMEMA="#F38BA8"
+
+#WiFi
+CWIFIA="#A6E3A1"
+CWIFIM="#F9E2AF"
+CWIFID="#F38BA8"
+
+#Bluetooth
+CBTA="#0082FC"
+
+#Volumen
+CVOLA="#89B4FA"
+CVOLM="#FAB387"
+CVOLB="#585B70"
+
+# Brillo de pantalla
+CBRIA="#F9E2AF"
+CBRIM="#FAB387"
+CBRIB="#94E2D5"
+
+# Hora
+CHORA="#CBA6F7"
+
+# Fecha
+CDATE="#89B4FA"
+
+
+
+
+
+
+##########
+# Fuentes
+##########
+FONT="JetBrains Mono-12"
+ICON_FONT="FiraCode Nerd Font-14"
+
+#######################
+# Geometría y posición
+#######################
+
+BAR_HEIGHT=20
+BAR_WIDTH=1920
+BAR_POSX=0
+BAR_POSY=0
+
+#########
+# Iconos
+#########
+
+DESKTOP_ICONS=("" "")
+ICON_CLOCK=(" ")
+ICON_DATE=("")
+ICON_WIFI=("")
+ICON_ETH=("")
+ICON_BLUETOOTH=("")
+ICON_BRIGHT=("")
+VOL_HIGT=("")
+VOL_MEDIUM=("")
+VOL_LOW=("")
+VOL_MUTE=("")
+ICON_MEMORY=("")
+ICON_CPU=("")
+ICON_SWAP=("")
+ICON_FRECUENCY=("󰓅")
+ICON_TEMP=("")
+ICON_DISK=("")
+ICON_SYSTEM=("")
+ICON_LOAD=("󰒖")
+BATTERY_FULL=("")
+
+BATTERY_75=("")
+BATTERY_50=("")
+BATTERY_25=("")
+BATTERY_0=("")
+ICON_IP=("󰩠")
+ICON_SPEED=("󱤎")
+ICON_BSSID=("")
+ICON_STATE=("󱇯")
+

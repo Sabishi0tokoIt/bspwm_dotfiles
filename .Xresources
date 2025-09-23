@@ -1,0 +1,60 @@
+!==========================================================
+! Archivo: ~/.Xresources
+! Descripción: Configuración de tema Eclipse oscuro para
+!              URxvt y dmenu, incluyendo colores ANSI,
+!              soporte de clic central, fuentes y ajustes
+!              de Xft para suavizado de texto.
+! Autor: Yandri Loor
+! Última modificación: 22 de Septiembre del 2025
+!==========================================================
+
+! ==========================
+! Colores base
+*.foreground:   #F8F8F2
+*.background:   #2B2B2B
+*.cursorColor:  #F8F8F0
+
+! Colores ANSI
+*.color0:  #2B2B2B
+*.color1:  #FF6C6B
+*.color2:  #A9B665
+*.color3:  #E6C547
+*.color4:  #6CA0D6
+*.color5:  #C678DD
+*.color6:  #56B6C2
+*.color7:  #F8F8F2
+*.color8:  #5C5C5C
+*.color9:  #FF6C6B
+*.color10: #A9B665
+*.color11: #E6C547
+*.color12: #6CA0D6
+*.color13: #C678DD
+*.color14: #56B6C2
+*.color15: #FFFFFF
+
+! URxvt settings
+URxvt*perl-ext: default,clipboard
+URxvt*scrollBar: false
+URxvt*depth: 32
+URxvt*background: #2B2B2B
+URxvt*foreground: #F8F8F2
+URxvt*cursorBlink: true
+URxvt*internalBorder: 8
+URxvt*font: xft:Monospace:size=11
+
+! Clipboard support (clic central para pegar)
+URxvt*keysym.M: \033]52;%p;%s\007
+
+! dmenu settings (usado con dmenu_run)
+dmenu*font: Monospace-11
+dmenu*bg: #2B2B2B
+dmenu*fg: #F8F8F2
+dmenu*selected_bg: #6CA0D6
+dmenu*selected_fg: #FFFFFF
+dmenu*scrollbar: 1
+dmenu*lines: 10
+
+! Otros ajustes
+Xft.antialias: 1
+Xft.hinting: 1
+

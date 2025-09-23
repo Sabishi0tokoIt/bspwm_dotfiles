@@ -1,0 +1,104 @@
+/* ======================================================= */
+/* Archivo: ~/.config/rofi/wifi.rasi                     */
+/* Descripción: Menú Wi-Fi con Rofi, tema oscuro,       */
+/*              barra de búsqueda alineada a la derecha,*/
+/*              iconos visibles y texto completo.       */
+/* Autor: Yandri Loor                                   */
+/* Última modificación: 21 de Septiembre del 2025       */
+/* ======================================================= */
+
+configuration {
+    font: "JetBrains Mono 10";
+    lines: 5;              /* Cantidad de filas visibles */
+    padding: 10;
+}
+
+/* ======================================================= */
+/* Estilos generales                                      */
+/* ======================================================= */
+* {
+    background-color:  #222222;
+    text-color:        White;
+    border-color:      #444444;
+    border-radius:     6;
+    font:              "FiraCode Nerd Font 9";
+    location:          north east;
+    x-offset:          -10;
+    y-offset:          30;
+}
+
+/* ======================================================= */
+/* Ventana principal                                      */
+/* ======================================================= */
+window {
+    background-color:  #222222;
+    text-color:        #ffffff;
+    border:            2;
+    border-radius:     9;
+    padding:           3;
+    width:             380px;   
+    height:            200px;
+}
+
+/* ======================================================= */
+/* Título de redes disponibles                             */
+/* ======================================================= */
+textbox {
+    expand: false;
+    str: "  Redes Wi-Fi Disponibles";
+    text-color: #ffffff;
+    background-color: #444444;
+    border: 1px;
+    border-color: #89b4fa;
+    border-radius: 6px;
+    padding: 6px;
+    horizontal-align: 0.5; /* 0 = izquierda, 0.5 = centro, 1 = derecha */
+}
+mainbox {
+    children: [ textbox, listview ];  /* primero el título, luego la lista */
+    spacing: 10px;
+    padding: 10px;
+}
+
+/* ======================================================= */
+/* Lista de entradas                                      */
+/* ======================================================= */
+listview {
+    spacing: 5;
+    scrollbar: false;
+    fixed-height: true;
+    separator: true;
+    separator-color: #555555;
+}
+
+inputbar {
+    enabled: false;
+}
+
+/* ======================================================= */
+/* Elementos                                              */
+/* ======================================================= */
+element {
+    background-color: transparent;
+    text-color: #ffffff;
+    padding: 3;
+}
+
+element selected {
+    background-color: #a6e3a1;
+    text-color: #d9e00e;
+}
+
+element alternate {
+    text-color: #d9e00e;
+}
+
+/* ======================================================= */
+/* Mainbox (controla espacio entre entry y lista)        */
+/* ======================================================= */
+mainbox {
+    orientation: vertical;
+    padding: 10;
+    spacing: 10;   /* Espacio entre barra de búsqueda y lista */
+}
+
