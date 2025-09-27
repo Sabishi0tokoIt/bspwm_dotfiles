@@ -1,0 +1,202 @@
+#####################################################
+# Archivo: ~/.dircolors 
+# Descripción:  esquema personalizado Nord/Gruvbox
+# Autor: Yandri Loor
+# Última modificación: 27 Septiembre 2025
+#####################################################
+COLORTERM ?*
+TERM Eterm
+TERM ansi
+TERM *color*
+TERM con[0-9]*x[0-9]*
+TERM cons25
+TERM console
+TERM cygwin
+TERM *direct*
+TERM dtterm
+TERM gnome
+TERM hurd
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mlterm
+TERM putty
+TERM rxvt*
+TERM screen*
+TERM st
+TERM terminator
+TERM tmux*
+TERM vt100
+TERM vt220
+TERM xterm*
+
+
+# Color por defecto
+NORMAL 00
+FILE 00           # Archivos normales
+RESET 0
+
+# Directorios
+DIR 01;94         # Azul intenso
+LINK 01;36        # Cyan brillante
+MULTIHARDLINK 01;36
+
+# Ejecutables
+EXEC 01;32        # Verde brillante
+
+# Enlaces simbólicos rotos en rojo (así sabes rápido cuándo algo apunta a nada)
+ORPHAN 01;31
+MISSING 01;31
+
+#Archivos ejecutables peligrosos (setuid/setgid)
+SETUID 37;41
+SETGID 30;43
+CAPABILITY 30;41
+
+# Archivos de bases de datos
+.sql 01;33
+.sqlite 01;33
+.db 01;33
+
+# Archivos de logs 
+.log 01;90   # Gris oscuro
+
+#Archivos de configuración
+.conf 01;32
+.ini 01;32
+.toml 01;32
+.yaml 01;32
+.yml 01;32
+
+#Archivos de backup
+.bak 02;37
+.old 02;37
+*~   02;37
+
+# Archivos comprimidos
+.tar 01;31
+.tgz 01;31
+.arc 01;31
+.arj 01;31
+.taz 01;31
+.lzh 01;31
+.lzma 01;31
+.tlz 01;31
+.txz 01;31
+.zip 01;31
+.z 01;31
+.Z 01;31
+.dz 01;31
+.gz 01;31
+.lz 01;31
+.xz 01;31
+.bz2 01;31
+.bz 01;31
+.tbz 01;31
+.tbz2 01;31
+.tz 01;31
+.deb 01;31
+.rpm 01;31
+.jar 01;31
+.war 01;31
+.ear 01;31
+.sar 01;31
+.rar 01;31
+.alz 01;31
+.ace 01;31
+.zoo 01;31
+.cpio 01;31
+.7z 01;31
+.rz 01;31
+
+# Imágenes
+.jpg 01;35
+.jpeg 01;35
+.gif 01;35
+.bmp 01;35
+.pbm 01;35
+.pgm 01;35
+.ppm 01;35
+.tga 01;35
+.xbm 01;35
+.xpm 01;35
+.tif 01;35
+.tiff 01;35
+.png 01;35
+.svg 01;35
+.svgz 01;35
+.mng 01;35
+.pcx 01;35
+.mov 01;35
+.mpg 01;35
+.mpeg 01;35
+.m2v 01;35
+.mkv 01;35
+.webm 01;35
+.webp 01;35
+.ogm 01;35
+.mp4 01;35
+.m4v 01;35
+.mp4v 01;35
+.vob 01;35
+.qt 01;35
+.nuv 01;35
+.wmv 01;35
+.asf 01;35
+.rm 01;35
+.rmvb 01;35
+.flc 01;35
+.avi 01;35
+.fli 01;35
+.flv 01;35
+.gl 01;35
+.dl 01;35
+.xcf 01;35
+.xwd 01;35
+.yuv 01;35
+.cgm 01;35
+.emf 01;35
+.axv 01;35
+.anx 01;35
+.ogv 01;35
+.ogx 01;35
+
+# Documentos
+.pdf 01;37
+.doc 01;37
+.docx 01;37
+.xls 01;37
+.xlsx 01;37
+.ppt 01;37
+.pptx 01;37
+.odt 01;37
+.ods 01;37
+.odp 01;37
+.tex 01;37
+.md 01;37
+.rst 01;37
+
+# Scripts y código
+.sh 01;92
+.py 01;36
+.js 01;93
+.ts 01;96
+.c 01;32
+.cpp 01;32
+.java 01;32
+.go 01;32
+.rs 01;32
+.php 01;32
+.html 01;32
+.css 01;32
+.scss 01;32
+
+# Dispositivos y sockets
+BLK 01;33
+CHR 01;33
+SOCK 01;35
+DOOR 01;35
+FIFO 40;33
+
