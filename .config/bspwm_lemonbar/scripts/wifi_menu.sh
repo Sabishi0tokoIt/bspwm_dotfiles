@@ -1,119 +1,74 @@
 #!/bin/bash
 #######################################################
 # Archivo: ~/.config/bspwm_lemonbar/scripts/wifi_menu.sh
-# Descripción: Menú interactivo Wi-Fi con Rofi.
-#              Permite:
-#                - Conectar redes guardadas o nuevas (pidiendo
-#                  contraseña si es necesario)
-#                - Desconectar la red activa
-#                - Olvidar redes guardadas
-#              Las redes se organizan en filas:
-#                1ª fila: red actualmente conectada
-#                2ª-n fila: redes guardadas pero no conectadas
-#                últimas filas: redes nunca conectadas antes
-#              Se usan 3 columnas con ancho fijo:
-#                1) Nombre de red (30 caracteres)
-#                2) Olvidar (si aplica)
-#                3) Conectar/Desconectar
+# Descripción: Abre nm-connection-editor en modo flotante
+#              y se cierra automáticamente si:
+#                - Se cierra una ventana hija
+#                - Pierde el foco
+#                - No hay interacción durante 5 segundos
 # Autor: Yandri Loor
-# Última modificación: 20 de Septiembre del 2025
+# Última modificación: 24 de Septiembre del 2025
 #######################################################
 
-ROFI_CMD="rofi -dmenu -i  -theme ~/.config/rofi/wifi.rasi"
+nm-connection-editor &
+PID=$!
 
-# Ancho fijo para la columna del nombre de red
-NAME_WIDTH=20
+# Espera a que aparezca la ventana principal
+sleep 1
 
-# ----------------------------
-# 1) Red actualmente conectada
-# ----------------------------
-ACTIVE_SSID=$(nmcli -t -f NAME,DEVICE connection show --active | awk -F: '$2!="" {print $1; exit}')
+# Función para listar todas las ventanas del proceso
+get_windows() {
+    xdotool search --pid "$PID" 2>/dev/null
+}
 
-# ----------------------------
-# 2) Redes visibles
-# ----------------------------
-mapfile -t VISIBLE_SSIDS < <(nmcli -t -f SSID dev wifi | sort -u)
+# Forzar foco en la primera ventana
+MAIN_WIN=$(get_windows | head -n1)
+[ -n "$MAIN_WIN" ] && xdotool windowfocus "$MAIN_WIN"
 
-# ----------------------------
-# 3) Redes guardadas
-# ----------------------------
-mapfile -t SAVED_SSIDS < <(nmcli -t -f NAME,TYPE connection show | awk -F: '$2=="802-11-wireless"{print $1}')
+# Variables de control
+HAD_CHILD=0
+LAST_INTERACTION=$(date +%s)   # tiempo de la última interacción
+TIMEOUT=5                      # segundos sin interacción
 
-# ----------------------------
-# Construir menú dinámico
-# ----------------------------
-MENU=""
-declare -A ACTIONS
+while sleep 1; do
+    CURR=$(xdotool getwindowfocus 2>/dev/null)
+    WINS=$(get_windows)
 
-# Primera fila: red activa
-if [ -n "$ACTIVE_SSID" ]; then
-    NAME_COL=$(printf "%-${NAME_WIDTH}s" "$ACTIVE_SSID")
-    MENU+="$NAME_COL [󰆴 Olvidar] [󰍛 Desconectar]\n"
-    ACTIONS["$NAME_COL [󰆴 Olvidar]"]="forget"
-    ACTIONS["$NAME_COL [󰍛 Desconectar]"]="disconnect"
-fi
+    # Si el proceso ya terminó, salir
+    [ -z "$WINS" ] && exit 0
 
-# Redes guardadas (no activas)
-for ssid in "${SAVED_SSIDS[@]}"; do
-    [ "$ssid" = "$ACTIVE_SSID" ] && continue
-    if printf '%s\n' "${VISIBLE_SSIDS[@]}" | grep -qx "$ssid"; then
-        NAME_COL=$(printf "%-${NAME_WIDTH}s" "$ssid")
-        MENU+="$NAME_COL [󰆴 Olvidar] [ 󰈀  Conectar ]\n"
-        ACTIONS["$NAME_COL [󰆴 Olvidar]"]="forget"
-        ACTIONS["$NAME_COL [ 󰈀  Conectar ]"]="connect"
+    COUNT=$(echo "$WINS" | wc -l)
+
+    # Registrar que hubo ventana hija
+    if [ "$COUNT" -gt 1 ]; then
+        HAD_CHILD=1
+    fi
+
+    # Si el foco está en alguna ventana del proceso → actualizar última interacción
+    if echo "$WINS" | grep -q "$CURR"; then
+        LAST_INTERACTION=$(date +%s)
+    fi
+
+    # Condición 1: se cerró la hija => cerrar todo
+    if [ "$COUNT" -eq 1 ] && [ "$HAD_CHILD" -eq 1 ]; then
+        for win in $WINS; do xdotool windowclose "$win" 2>/dev/null; done
+        kill $PID 2>/dev/null
+        break
+    fi
+
+    # Condición 2: perdió el foco => cerrar todo
+    if ! echo "$WINS" | grep -q "$CURR"; then
+        for win in $WINS; do xdotool windowclose "$win" 2>/dev/null; done
+        kill $PID 2>/dev/null
+        break
+    fi
+
+    # Condición 3: 5s sin interacción => cerrar todo
+    NOW=$(date +%s)
+    if (( NOW - LAST_INTERACTION >= TIMEOUT )); then
+        for win in $WINS; do xdotool windowclose "$win" 2>/dev/null; done
+        kill $PID 2>/dev/null
+        break
     fi
 done
-
-# Redes nunca conectadas
-for ssid in "${VISIBLE_SSIDS[@]}"; do
-    [[ "$ssid" = "$ACTIVE_SSID" ]] && continue
-    [[ " ${SAVED_SSIDS[*]} " == *" $ssid "* ]] && continue
-    NAME_COL=$(printf "%-${NAME_WIDTH}s" "$ssid")
-    MENU+="$NAME_COL             [ 󱘖  Conectar ]\n"
-    ACTIONS["$NAME_COL [ 󱘖  Conectar ]"]="connect"
-done
-
-# ----------------------------
-# Mostrar menú en Rofi
-# ----------------------------
-CHOICE=$(echo -e "$MENU" | $ROFI_CMD)
-
-[ -z "$CHOICE" ] && exit 0
-
-# ----------------------------
-# Determinar acción
-# ----------------------------
-COLUMN=$(echo "$CHOICE" | awk '{print $2}')
-
-if [[ "$COLUMN" == "[󰆴" ]]; then
-    SSID=$(echo "$CHOICE" | awk '{print $1}')
-    ACTION="forget"
-elif [[ "$COLUMN" == "[󰍛" || "$COLUMN" == "[󰈀" || "$COLUMN" == "[󱘖" ]]; then
-    SSID=$(echo "$CHOICE" | awk '{print $1}')
-    ACTION="connect_disconnect"
-else
-    exit 0
-fi
-
-# ----------------------------
-# Ejecutar acción
-# ----------------------------
-case "$ACTION" in
-    forget)
-        nmcli connection delete "$SSID" && notify-send " Olvidada" "Red: $SSID"
-        ;;
-    connect_disconnect)
-        if [ "$SSID" = "$ACTIVE_SSID" ]; then
-            nmcli connection down "$SSID" && notify-send " Desconectada" "Red: $SSID"
-        else
-            if nmcli connection show | grep -q "^$SSID$"; then
-                nmcli connection up "$SSID" && notify-send " Conectado" "A la red: $SSID"
-            else
-                PASS=$(rofi -dmenu -password -p "Contraseña $SSID:")
-                [ -n "$PASS" ] && nmcli dev wifi connect "$SSID" password "$PASS" \
-                    && notify-send " Conectado" "A la red: $SSID"
-            fi
-        fi
-        ;;
-esac
 

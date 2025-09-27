@@ -77,6 +77,11 @@ bspc rule -a feh state=floating border=off
 
 bspc rule -a Gvim state=floating
 bspc rule -a Hangouts state=floating
+bspc rule -a Yad state=floating
+bspc rule -a sys_message state=floating
+bspc rule -a Blueman-manager state=floating rectangle=550x250+1365+22
+bspc rule -a Nm-connection-editor state=floating rectangle=550x250+1365+22
+
 
 # Reglas para ventanas flotantes de mantenimiento
 bspc rule -a Alacritty state=floating center=on sticky=on
@@ -86,6 +91,7 @@ feh --bg-scale "$HOME/imagenes/wallpaper-2.jpg"
 
 # Inicios
 ~/.config/bspwm_lemonbar/bar.sh &
+nm-applet --indicator &
 
 dunst -c ~/.config/dunst/dunstrc &
 xss-lock lockscreen &

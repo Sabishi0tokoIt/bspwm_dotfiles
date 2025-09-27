@@ -11,7 +11,8 @@
 #              - Comportamiento: Si la barra es estática o dinámica, y eventos de actualización.
 #              - Módulos: Configuración específica para cada módulo (ej: formato de fecha/hora).
 # Autor: Yandri Loor
-# Última modificación: 19 de Septiembre del 2025
+# Fecha de cración: 19 de Septiembre del 2025
+# Última modificación: 25 de Septiembre del 2025
 ##########################################################
 
 ##############################
@@ -122,3 +123,4 @@ ICON_SPEED=("󱤎")
 ICON_BSSID=("")
 ICON_STATE=("󱇯")
 
+ICON_POWER=("⏻")

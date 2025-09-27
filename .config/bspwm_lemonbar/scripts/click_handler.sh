@@ -3,7 +3,8 @@
 # Archivo: ~/.config/bspwm_lemonbar_scripts/click_handler.sh
 # Descripción: Recibe comandos desde lemonbar y los ejecuta
 # Autor: Yandri Loor
-# Fecha de modificación: 20 de Septiembre del 2025
+# Fecha de cración: 19 de Septiembre del 2025
+# Última modificación: 25 de Septiembre del 2025
 ###############################################################
 
 
@@ -31,9 +32,9 @@ while read -r cmd; do
         WIFI_MENU)
             "$HOME/.config/bspwm_lemonbar/scripts/wifi_menu.sh" &
             ;;
-		ETH_NOTIFY)
-			"$HOME/.config/bspwm_lemonbar/scripts/ethernet.sh" &
-			;;
+        ETH_NOTIFY)
+            "$HOME/.config/bspwm_lemonbar/scripts/ethernet.sh" &
+            ;;
         BLUETOOTH_NOTIFY)
             "$HOME/.config/bspwm_lemonbar/scripts/bluetooth_notify.sh" &
             ;;
@@ -41,12 +42,14 @@ while read -r cmd; do
             "$HOME/.config/bspwm_lemonbar/scripts/bluetooth_menu.sh" &
             ;;
         SYSTEM_NOTIFY)
-			"$HOME/.config/bspwm_lemonbar/scripts/system_notify.sh" &
-			;;
-		SYSTEM_MENU)
-			"$HOME/.config/bspwm_lemonbar/scripts/sys_maintenance/sys_menu.sh" &
-			;;
-	
+            "$HOME/.config/bspwm_lemonbar/scripts/system_notify.sh" &
+            ;;
+        SYSTEM_MENU)
+            "$HOME/.config/bspwm_lemonbar/scripts/sys_maintenance/sys_menu.sh" &
+            ;;
+        POWER_MENU)
+            "$HOME/.config/bspwm_lemonbar/scripts/power_menu.sh" &
+            ;;	
 
 	
         *)

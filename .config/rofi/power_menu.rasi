@@ -1,20 +1,17 @@
 /* ======================================================= */
-/* Archivo: ~/.config/rofi/bluetooth.rasi                  */
-/* Descripción: Tema para los mensajes de mantenimiento    */
+/* Archivo: ~/.config/rofi/power_menu.rasi                 */
+/* Descripción: Tema para el menú de apagado en Rofi       */
 /*              inspirado en temas oscuros, pero sin       */
 /*              barra de búsqueda y con barra de título.   */
 /* Autor: Yandri Loor                                      */
-/* Última modificación: 23 de Septiembre del 2025          */
+/* Fecha de creación: 25  de Septiembre del 2025           */
+/* Última modificación: 25 de Septiembre del 2025          */
 /* ======================================================= */
 
 configuration {
-    font: "JetBrains Mono 14";
-    lines: 2;              /* Cantidad de filas visibles */
+    font: "JetBrains Mono 10";
+    lines: 6;              /* Cantidad de filas visibles */
     padding: 10;
-
-    /* --- Click con un solo clic izquierdo --- */
-    me-select-entry: "";
-    me-accept-entry: "MousePrimary";
 }
 
 /* ======================================================= */
@@ -40,8 +37,8 @@ window {
     border:            2;
     border-radius:     9;
     padding:           3;
-    width:             580px;
-    height:            140px;
+    width:             420px;
+    height:            250px;
 }
 
 /* ======================================================= */
@@ -49,7 +46,7 @@ window {
 /* ======================================================= */
 textbox {
     expand: false;
-    str: " AVISO";
+    str: "⏻ APAGAR";
     text-color: #ffffff;
     background-color: #444444;
     border: 1px;

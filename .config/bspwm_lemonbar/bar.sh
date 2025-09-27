@@ -8,6 +8,7 @@
 #              - Gestionar la persistencia de la barra (ej: reinicio automático en caso de fallo).
 #              - Centralizar la integración entre BSPWM, LemonBar y los módulos del sistema.
 # Autor: Yandri Loor
+# Fecha de cración: 19 de Septiembre del 2025
 # Última modificación: 19 de Septiembre del 2025
 ####################################################################
 
@@ -47,7 +48,7 @@ fi
 
 while true; do
     # %{l} = izquierda, %{c} = centro, %{r} = derecha
-    echo "%{l}$(W) %{c} $(WT) $(date +'%H:%M') %{r} $(ETH) $(WIFI) $(BAT) $(BT) $(VOL) $(BRIGHT) $(SYS) $(DATE) $(TIME)   "
+    echo "%{l}$(W) %{c} $(WT) %{r} $(ETH) $(WIFI) $(BAT) $(BT) $(VOL) $(BRIGHT) $(SYS) $(DATE) $(TIME) $(POW)  "
     sleep 1
 
 # Lanzar lemonbar.

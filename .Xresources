@@ -40,10 +40,15 @@ URxvt*background: #2B2B2B
 URxvt*foreground: #F8F8F2
 URxvt*cursorBlink: true
 URxvt*internalBorder: 8
-URxvt*font: xft:Monospace:size=11
+URxvt*font: xft:FiraCode Nerd Font Mono:size=12, \
+            xft:Symbols Nerd Font:size=12, \
+            xft:Adwaita Mono:size=11
+
+
 
 ! Clipboard support (clic central para pegar)
-URxvt*keysym.M: \033]52;%p;%s\007
+!#URxvt*keysym.C-S-c: \033]52;%p;%s\007
+
 
 ! dmenu settings (usado con dmenu_run)
 dmenu*font: Monospace-11

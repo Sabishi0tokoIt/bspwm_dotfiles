@@ -10,7 +10,8 @@
 #              - Lógica de actualización: Gestiona la frecuencia y eventos de actualización.
 #              - Personalización: Permite añadir o modificar módulos según necesidades.
 # Autor: Yandri Loor
-# Última modificación: 21 de Septiembre del 2025
+# Fecha de cración: 19 de Septiembre del 2025
+# Última modificación: 25 de Septiembre del 2025
 ####################################################################
 
 CONFIG="$HOME/.config/bspwm_lemonbar/config"
@@ -168,7 +169,7 @@ BT() {
 
     # Salida a Lemonbar con clics
     # A1: clic izquierdo → menú, A3: clic derecho → notificación
-    echo "%{F$COLOR}%{A3:BLUETOOTH_NOTIFY:}%{A1:BLUETOOTH_MENU:}${ICON_BLUETOOTH} ${STATUS}%{A}%{A}%{F-}"
+    echo "%{F$COLOR}%{A3:BLUETOOTH_NOTIFY:}%{A1:BLUETOOTH_MENU:}${ICON_BLUETOOTH}%{A}%{A}%{F-}"
 }
 
 ########
@@ -200,7 +201,7 @@ WIFI() {
 
     # Salida a lemonbar con clic izquierdo y derecho
     # Formato: icono + SSID + porcentaje
-    echo "%{F$COLOR}%{A3:WIFI_NOTIFY:}%{A1:WIFI_MENU:}${ICON_WIFI} ${SIGNAL}% %{A}%{A}%{F-}"
+    echo "%{F$COLOR}%{A3:WIFI_NOTIFY:}%{A1:WIFI_MENU:}${ICON_WIFI} %{A}%{A}%{F-}"
 }
 
 ###########
@@ -312,6 +313,15 @@ BRIGHT() {
 
     # Salida para Lemonbar (solo icono + porcentaje, sin clicable)
     echo "%{F$COLOR}$ICON_BRIGHT $BRIGHTNESS% %{F-}"
+}
+
+#############
+# Power Menu
+#############
+
+POW() {
+    # Botón de apagado con clic izquierdo
+    echo "%{F$WARNING}%{A1:POWER_MENU:}$ICON_POWER%{A}%{F-}"
 }
 
 

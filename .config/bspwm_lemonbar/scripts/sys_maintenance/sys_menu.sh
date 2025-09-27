@@ -23,36 +23,77 @@ options=(
 choice=$(printf '%s\n' "${options[@]}" | $ROFI_CMD -p "Mantenimiento")
 
 show_message() {
-    # Mensaje temporal con Rofi
-    echo "$1" | rofi -dmenu -p "Info" -theme $ROFI_MESSAGE -mesg "$1" &
-    sleep "${2:-5}"  # Tiempo por defecto 5s
-    kill $! 2>/dev/null
+    local title="$1"
+    local msg="$2"
+    local timeout="${3:-5}"
+
+    alacritty \
+        --title "sys_message" \
+        --class "sys_message" \
+        --option window.dimensions.columns=45 \
+        --option window.dimensions.lines=5 \
+        -e bash -c "
+            clear
+            tput civis  # Ocultar cursor
+            cols=\$(tput cols)
+
+            # Título centrado
+            printf '%*s\n\n' \$(( (cols+${#title})/2 )) '$title'
+
+            # Texto normal (puede ser multilínea)
+            echo -e '$msg'
+
+            sleep $timeout
+        " &
 }
+
+show_message1() {
+    local title="$1"
+    local msg="$2"
+    local timeout="${3:-5}"
+
+    alacritty \
+        --title "sys_message" \
+        --class "sys_message" \
+        --option window.dimensions.columns=80 \
+        --option window.dimensions.lines=25 \
+        -e bash -c "
+            clear
+            tput civis  # Ocultar cursor
+            cols=\$(tput cols)
+
+            # Título centrado
+            printf '%*s\n\n' \$(( (cols+${#title})/2 )) '$title'
+
+            # Texto normal (puede ser multilínea)
+            echo -e '$msg'
+
+            sleep $timeout
+        " &
+}
+
 
 case "$choice" in
     " Limpiar caché de paquetes")
         bash "$DIR/clean_cache.sh"
-        show_message "✔ Caché de paquetes se ha limpiado con éxito." 5
+        show_message " Advertencia" "✔ Caché de paquetes se ha limpiado con éxito." 5
         ;;
     " Eliminar paquetes huérfanos")
         bash "$DIR/clean_orphans.sh"
-        show_message "✔ Paquetes huérfanos eliminados con éxito." 5
+        show_message " Advertencia" "✔ Paquetes huérfanos eliminados con éxito." 5
         ;;
+
     " Ver servicios en ejecución")
-        # Terminal centrada (usando alacritty o gnome-terminal)
-        
-        alacritty -t sys_services -e bash -c "$DIR/check_services.sh; read -p 'Presiona Enter para cerrar...'" &
+        alacritty -t sys_services -e bash -c "$DIR/check_services.sh; exec bash" &
         ;;
         
     " Procesos pesados")
-        alacritty -c "$DIR/kill_heavy.sh; read -p 'Presiona Enter para cerrar...'" &
-        ;;
+        alacritty -t kill-c -e bash -c "$DIR/kill_heavy.sh; read -p 'Presiona Enter para cerrar...'" &
+                ;;
 
     " Estado RAM/Swap")
-        bash "$DIR/ram_swap.sh" | rofi -dmenu -theme $ROFI_MESSAGE -mesg "Estado RAM/Swap" &
-        
-        sleep 5
-        kill $! 2>/dev/null
+        RAM_INFO=$(bash "$DIR/ram_swap.sh")
+        show_message1 " Advertencia" "$RAM_INFO" 5
         ;;
     *)
         exit 0
